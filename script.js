@@ -1,7 +1,7 @@
 // 1. MODO CLARO Y OSCURO
 const botonTema = document.getElementById("botonTema");
 
-botonTema.addEventListener("click", function() {
+if (botonTema) botonTema.addEventListener("click", function() {
   document.body.classList.toggle("modo-oscuro");
 
   if (document.body.classList.contains("modo-oscuro")) {
@@ -102,17 +102,110 @@ enlacesProyecto.forEach(function(enlace) {
   });
 });
 
-// 6. MENÚ: CERRAR DESPUÉS DE ELEGIR UNA OPCIÓN EN CELULAR
-const enlacesMenu = document.querySelectorAll(".navbar-nav .nav-link");
+// 6. NAVEGACIÓN TIPO APLICACIÓN (PWA)
+// Cada apartado funciona como una vista independiente dentro de la misma PWA.
+// El navbar cambia de vista sin desplazar toda la página.
+const menuToggle = document.getElementById("menuToggle");
 const menu = document.getElementById("menu");
+const appScreens = [...document.querySelectorAll("[data-app-screen]")];
+const navLinks = [...document.querySelectorAll('a[href^="#"]')];
 
-enlacesMenu.forEach(function(enlace) {
-  enlace.addEventListener("click", function() {
-    if (menu.classList.contains("show")) {
-      document.querySelector(".navbar-toggler").click();
+function closePersonalMenu() {
+  if (!menu || !menuToggle) return;
+  menu.classList.remove("show");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.setAttribute("aria-label", "Abrir menú");
+}
+
+function showAppScreen(id, updateHistory = true) {
+  const target = appScreens.find(screen => screen.dataset.appScreen === id);
+  if (!target) return;
+  appScreens.forEach(screen => {
+    const active = screen === target;
+    screen.classList.toggle("active", active);
+    screen.setAttribute("aria-hidden", String(!active));
+    if (active) screen.removeAttribute("inert");
+    else screen.setAttribute("inert", "");
+  });
+  navLinks.forEach(link => {
+    const href = link.getAttribute("href");
+    const active = href === `#${id}` || (id === "proyectos" && href === "#proyectos");
+    link.classList.toggle("active", active);
+    if (active) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
+  if (updateHistory && location.hash !== `#${id}`) {
+    history.pushState({ screen: id }, "", `#${id}`);
+  }
+  target.scrollTop = 0;
+  closePersonalMenu();
+}
+
+if (menuToggle && menu) {
+  menuToggle.addEventListener("click", () => {
+    const open = !menu.classList.contains("show");
+    menu.classList.toggle("show", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+  });
+}
+
+navLinks.forEach(link => {
+  link.addEventListener("click", event => {
+    const href = link.getAttribute("href");
+    if (!href || href.length < 2) return;
+    const id = href.slice(1);
+    if (appScreens.some(screen => screen.dataset.appScreen === id)) {
+      event.preventDefault();
+      if (link.hasAttribute("data-project-filter")) {
+        filtrarProyectos(link.dataset.projectFilter);
+      }
+      showAppScreen(id);
     }
   });
 });
+
+window.addEventListener("popstate", () => {
+  const id = location.hash.slice(1) || "inicio";
+  showAppScreen(id, false);
+});
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closePersonalMenu();
+});
+document.addEventListener("click", event => {
+  if (menu && menuToggle && !menu.contains(event.target) && !menuToggle.contains(event.target)) {
+    closePersonalMenu();
+  }
+});
+
+
+// Controles exclusivos de la vista móvil.
+const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+if (mobileMenuToggle && mobileMenu) {
+  mobileMenuToggle.addEventListener("click", () => {
+    const open = !mobileMenu.classList.contains("open");
+    mobileMenu.classList.toggle("open", open);
+    mobileMenuToggle.setAttribute("aria-expanded", String(open));
+    mobileMenuToggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+  });
+  mobileMenu.addEventListener("click", event => {
+    if (event.target.closest("a")) {
+      mobileMenu.classList.remove("open");
+      mobileMenuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+const mobileThemeButton = document.getElementById("botonTemaMobile");
+if (mobileThemeButton) {
+  mobileThemeButton.addEventListener("click", () => {
+    document.body.classList.toggle("modo-oscuro");
+  });
+}
+
+// Carga inicial y navegación directa a una sección mediante URL.
+const initialScreen = location.hash.slice(1);
+showAppScreen(appScreens.some(screen => screen.dataset.appScreen === initialScreen) ? initialScreen : "inicio", false);
 
 // 7. FORMULARIO DE CONTRATACIÓN CON VALIDACIONES PROGRESIVAS
 const formulario = document.getElementById("formularioContratacion");
@@ -244,3 +337,6 @@ formulario.addEventListener("submit", function(evento) {
     resultado.className = "text-danger fw-bold";
   }
 });
+
+
+
