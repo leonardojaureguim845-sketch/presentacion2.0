@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#212529"/>
+  <meta name="description" content="Portafolio personal y proyectos académicos de Leonardo, estudiante de Ingeniería en Sistemas."/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Leo"/>  <link rel="manifest" href="manifest.json"/>
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png"/>
+  <link rel="apple-touch-icon" href="icons/icon-192.png"/>
+  <title>Leo | Portafolio personal</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="estilos.css" rel="stylesheet"/>
+</head>
+<body>
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem("leo:theme");
+        if (theme !== "dark" && theme !== "light") {
+          theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        if (theme === "dark") document.body.classList.add("modo-oscuro");
+      } catch (e) {}
+    })();
+  </script>
+  <a class="skip-link" href="#appViews">Saltar al contenido</a>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top app-navbar" aria-label="Navegación principal">
+    <div class="container-fluid">
+      <div class="navbar-brand-wrap">
+        <a class="navbar-brand fw-bold mb-0" href="#inicio">LEO</a>
+        <span class="navbar-date d-none d-md-inline" id="headerDate"></span>
+      </div>
+      <div class="navbar-actions">
+        <span class="connection-pill" id="headerConnection">En línea</span>
+        <button class="icon-btn d-none d-lg-inline-flex" id="headerSearch" type="button" aria-label="Buscar proyectos">⌕</button>
+        <button class="btn btn-outline-light btn-sm d-none d-lg-inline-block" id="botonTemaDesktop" type="button" aria-pressed="false">Modo oscuro</button>
+        <button class="navbar-toggler" type="button" id="menuToggle" aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse" id="menu">
+        <div class="drawer-header d-lg-none">
+          <span class="drawer-brand">LEO</span>
+          <button class="drawer-close" id="menuClose" type="button" aria-label="Cerrar menú">✕</button>
+        </div>
+        <ul class="navbar-nav ms-auto align-items-lg-center drawer-nav">
+          <li class="menu-category d-lg-none">Principal</li>
+          <li class="nav-item"><a class="nav-link active" href="#inicio" aria-current="page">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sobre-mi">Sobre mí</a></li>
+
+          <li class="menu-category d-lg-none">Mi mundo</li>
+          <li class="nav-item"><a class="nav-link" href="#pasatiempos">Pasatiempos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#intereses">Intereses</a></li>
+          <li class="nav-item"><a class="nav-link" href="#deportes">Deportes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#deportes-lista">Más deportes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#horario">Horario</a></li>
+          <li class="nav-item"><a class="nav-link" href="#musica">Música</a></li>
+          <li class="nav-item"><a class="nav-link" href="#juegos">Juegos</a></li>
+
+          <li class="menu-category d-lg-none">Portafolio</li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#proyectos" id="projectsMenu">Proyectos</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" data-project-filter="todos" href="#proyectos">Ver todos</a></li>
+              <li><a class="dropdown-item" data-project-filter="programacion" href="#proyectos">Programación</a></li>
+              <li><a class="dropdown-item" data-project-filter="sistemas" href="#proyectos">Sistemas</a></li>
+              <li><a class="dropdown-item" data-project-filter="bases" href="#proyectos">Bases de datos</a></li>
+              <li><a class="dropdown-item" data-project-filter="electronica" href="#proyectos">Electrónica</a></li>
+              <li><a class="dropdown-item" data-project-filter="investigacion" href="#proyectos">Investigación operativa</a></li>
+            </ul>
+            <details class="mobile-submenu d-lg-none">
+              <summary>Filtrar proyectos</summary>
+              <a href="#proyectos" data-project-filter="todos">Ver todos</a>
+              <a href="#proyectos" data-project-filter="programacion">Programación</a>
+              <a href="#proyectos" data-project-filter="sistemas">Sistemas</a>
+              <a href="#proyectos" data-project-filter="bases">Bases de datos</a>
+              <a href="#proyectos" data-project-filter="electronica">Electrónica</a>
+              <a href="#proyectos" data-project-filter="investigacion">Investigación operativa</a>
+            </details>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
+          <li class="nav-item"><a class="nav-link" href="#formacion">Formación</a></li>
+          <li class="nav-item"><a class="nav-link" href="#grafico">Gráfico</a></li>
+          <li class="nav-item"><a class="nav-link" href="#bitacora">Bitácora</a></li>
+
+          <li class="menu-category d-lg-none">Contacto</li>
+          <li class="nav-item"><a class="nav-link" href="#registro">Contratación</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+        </ul>
+        <div class="drawer-footer d-lg-none">
+          <button class="btn btn-outline-light btn-sm w-100 mb-2" id="botonTema" type="button" aria-pressed="false">Modo oscuro</button>
+          <button class="btn btn-outline-light btn-sm w-100" id="pwaInstallButtonDrawer" type="button">Instalar aplicación</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+
+  <main class="app-views" id="appViews" tabindex="-1">
+    <header class="container text-center py-5 active app-screen hero-screen" data-app-screen="inicio" id="inicio">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-content reveal">
+        <p class="text-uppercase small hero-kicker mb-2">Mi espacio personal</p>
+        <div class="hero-orbit-wrap">
+          <div class="hero-core">
+            <span>LEO</span>
+          </div>
+          <a class="orbit-item" href="#sobre-mi" style="--angle: 0deg;"><span class="orbit-icon">◉</span><span class="orbit-label">Perfil</span></a>
+          <a class="orbit-item" href="#formacion" style="--angle: 45deg;"><span class="orbit-icon">▣</span><span class="orbit-label">Universidad</span></a>
+          <a class="orbit-item" href="#habilidades" style="--angle: 90deg;"><span class="orbit-icon">⚙</span><span class="orbit-label">Habilidades</span></a>
+          <a class="orbit-item" href="#proyectos" style="--angle: 135deg;"><span class="orbit-icon">📁</span><span class="orbit-label">Proyectos</span></a>
+          <a class="orbit-item" href="#deportes" style="--angle: 180deg;"><span class="orbit-icon">⚽</span><span class="orbit-label">Deportes</span></a>
+          <a class="orbit-item" href="#musica" style="--angle: 225deg;"><span class="orbit-icon">♪</span><span class="orbit-label">Música</span></a>
+          <a class="orbit-item" href="#juegos" style="--angle: 270deg;"><span class="orbit-icon">🎮</span><span class="orbit-label">Juegos</span></a>
+          <a class="orbit-item" href="#pasatiempos" style="--angle: 315deg;"><span class="orbit-icon">★</span><span class="orbit-label">Pasatiempos</span></a>
+        </div>
+        <p class="h3 hero-subtitle mb-2">Estudiante de Ingeniería en Sistemas</p>
+        <p class="hero-meta mb-3">UPDS · Sexto semestre · La Paz, Bolivia · 21 años</p>
+        <blockquote class="hero-quote mb-4">
+          <p class="fst-italic mb-1">«No nací para vivir bajo la sombra de quienes ya hicieron historia»</p>
+          <footer class="small hero-quote-footer">Lema personal · atribución pendiente de verificación</footer>
+        </blockquote>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+          <a class="btn btn-primary hero-btn" href="#proyectos">Ver proyectos</a>
+          <a class="btn btn-outline-light hero-btn" href="#contacto">Contacto</a>
+        </div>
+        <p class="small hero-note mt-4 mb-0">Portafolio académico y personal en actualización continua.</p>
+      </div>
+    </header>
+
+    <section class="container seccion app-screen" data-app-screen="sobre-mi" data-lazy-component="section" id="sobre-mi">
+      <h2>Sobre mí</h2>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5>Mi perfil</h5>
+              <p>Tengo 21 años, estudio Ingeniería en Sistemas en la UPDS y actualmente curso el sexto semestre. Vivo en La Paz, Bolivia.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5>Mis objetivos personales</h5>
+              <ul class="mb-0">
+                <li>Mejorar mi rendimiento deportivo.</li>
+                <li>Retomar actividades que anteriormente practicaba.</li>
+                <li>Seguir desarrollándome personalmente.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-secondary mt-3 mb-0">
+        <strong>Mi lema:</strong> «No nací para vivir bajo la sombra de quienes ya hicieron historia».
+      </div>
+      <p class="small text-secondary mt-3 mb-0">La descripción personal ampliada se incorporará cuando esté confirmada.</p>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="pasatiempos" data-lazy-component="section" id="pasatiempos">
+      <h2>Mis pasatiempos</h2>
+      <div class="row g-3">
+        <div class="col-md-4"><div class="card h-100"><img alt="Persona jugando videojuegos" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&amp;fit=crop&amp;w=800&amp;q=85"/><div class="card-body"><h5>Videojuegos</h5><p>Me gusta jugar y entretenerme en mi tiempo libre.</p></div></div></div>
+        <div class="col-md-4"><div class="card h-100"><img alt="Micrófono en un escenario" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&amp;fit=crop&amp;w=800&amp;q=85"/><div class="card-body"><h5>Música</h5><p>Escuchar mis canciones y artistas favoritos.</p></div></div></div>
+        <div class="col-md-4"><div class="card h-100"><img alt="Redes sociales" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&amp;fit=crop&amp;w=800&amp;q=85"/><div class="card-body"><h5>Redes sociales</h5><p>Ver contenido en YouTube y TikTok.</p></div></div></div>
+        <div class="col-md-4"><div class="card h-100"><img alt="Amigos compartiendo" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&amp;fit=crop&amp;w=800&amp;q=85"/><div class="card-body"><h5>Amigos</h5><p>Salir y compartir con mis amigos.</p></div></div></div>
+        <div class="col-md-4"><div class="card h-100"><img alt="Persona practicando deporte" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&amp;fit=crop&amp;w=800&amp;q=85"/><div class="card-body"><h5>Deportes</h5><p>Voleibol, fútbol y básquetbol.</p></div></div></div>
+        <div class="col-md-4"><div class="card h-100"><img alt="Camino en la naturaleza" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=800&amp;q=85"/><div class="card-body"><h5>Caminar</h5><p>Salir a caminar y despejar la mente.</p></div></div></div>
+      </div>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="intereses" data-lazy-component="section" id="intereses">
+      <h2>Mis intereses</h2>
+      <div class="row g-3">
+        <div class="col-md-6"><div class="card h-100"><img alt="Circuitos y tecnología" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/><div class="card-body"><h5>Nuevas tecnologías</h5><p>Conocer herramientas, programas y avances tecnológicos.</p></div></div></div>
+        <div class="col-md-6"><div class="card h-100"><img alt="Libros para estudiar idiomas" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/><div class="card-body"><h5>Aprender idiomas</h5><p>Ampliar mis conocimientos y mejorar mis oportunidades.</p></div></div></div>
+      </div>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="deportes" data-lazy-component="section" id="deportes">
+      <h2 class="text-center mb-3">Mis deportes favoritos</h2>
+      <div class="carousel slide" data-bs-ride="carousel" id="carruselDeportes">
+        <div class="carousel-indicators">
+          <button class="active" data-bs-slide-to="0" data-bs-target="#carruselDeportes" type="button" aria-label="Diapositiva 1"></button>
+          <button data-bs-slide-to="1" data-bs-target="#carruselDeportes" type="button" aria-label="Diapositiva 2"></button>
+          <button data-bs-slide-to="2" data-bs-target="#carruselDeportes" type="button" aria-label="Diapositiva 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img alt="Partido de fútbol" class="d-block w-100" decoding="async" fetchpriority="high" loading="eager" src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&amp;fit=crop&amp;w=1200&amp;q=80"/>
+            <div class="carousel-caption"><h5>Fútbol</h5></div>
+          </div>
+          <div class="carousel-item">
+            <img alt="Partido de voleibol" class="d-block w-100" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&amp;fit=crop&amp;w=1200&amp;q=80"/>
+            <div class="carousel-caption"><h5>Voleibol</h5></div>
+          </div>
+          <div class="carousel-item">
+            <img alt="Entrenamiento de boxeo" class="d-block w-100" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&amp;fit=crop&amp;w=1200&amp;q=80"/>
+            <div class="carousel-caption"><h5>Boxeo</h5></div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carruselDeportes" type="button"><span class="carousel-control-prev-icon"></span></button>
+        <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carruselDeportes" type="button"><span class="carousel-control-next-icon"></span></button>
+      </div>
+      <p class="text-center text-secondary mt-2">También me gustan el básquetbol y el raquet.</p>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="deportes-lista" data-lazy-component="section" id="deportes-lista">
+      <h2>Explora mis deportes</h2>
+      <p>Selecciona una categoría para ver mis deportes, desde los que más me gustan.</p>
+      <div class="mb-3 d-flex flex-wrap gap-2">
+        <button class="btn btn-dark filtro-deporte active" data-sport="todos" type="button">Todos</button>
+        <button class="btn btn-outline-dark filtro-deporte" data-sport="favoritos" type="button">Mis favoritos</button>
+      </div>
+      <div class="row g-3" id="listaDeportes">
+        <div class="col-md-4 deporte-item" data-sport="favorito">
+          <div class="card h-100"><img alt="Balón de voleibol" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&amp;fit=crop&amp;w=800&amp;q=85"/><div class="card-body"><span class="badge bg-dark">Favorito 1*</span><h5 class="mt-2">Voleibol</h5><p>Uno de los deportes que más disfruto.</p></div></div>
+        </div>
+        <div class="col-md-4 deporte-item" data-sport="favorito">
+          <div class="card h-100"><img alt="Partido de fútbol" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&amp;fit=crop&amp;w=800&amp;q=85"/><div class="card-body"><span class="badge bg-dark">Favorito 2*</span><h5 class="mt-2">Fútbol</h5><p>Deporte que combina técnica y equipo.</p></div></div>
+        </div>
+        <div class="col-md-4 deporte-item" data-sport="normal">
+          <div class="card h-100"><img alt="Cancha de básquetbol" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&amp;fit=crop&amp;w=800&amp;q=85"/><div class="card-body"><h5>Básquetbol</h5><p>Un deporte dinámico y competitivo.</p></div></div>
+        </div>
+        <div class="col-md-4 deporte-item" data-sport="normal">
+          <div class="card h-100"><img alt="Entrenamiento de boxeo" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&amp;fit=crop&amp;w=800&amp;q=85"/><div class="card-body"><h5>Boxeo</h5><p>Un deporte de disciplina y resistencia.</p></div></div>
+        </div>
+        <div class="col-md-4 deporte-item" data-sport="normal">
+          <div class="card h-100"><img alt="Deporte de raqueta" class="card-img-top imagen-tarjeta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&amp;fit=crop&amp;w=800&amp;q=85"/><div class="card-body"><h5>Raquet</h5><p>Otro deporte que me interesa.</p></div></div>
+        </div>
+      </div>
+      <p class="small text-secondary mt-2">*Orden provisional según la selección inicial; puedes cambiarlo en el código cuando definas tu ranking.</p>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="horario" data-lazy-component="section" id="horario">
+      <h2>Mi horario</h2>
+      <p>Mi rutina general de lunes a sábado.</p>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped text-center">
+          <thead class="table-dark"><tr><th>Momento</th><th>Actividad</th></tr></thead>
+          <tbody>
+            <tr><td>Mañana</td><td>Universidad</td></tr>
+            <tr><td>Tarde</td><td>Estudiar y hacer tareas</td></tr>
+            <tr><td>Tarde / noche</td><td>Ejercicio</td></tr>
+            <tr><td>Noche</td><td>Descanso y tiempo libre</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="musica" data-lazy-component="section" id="musica">
+      <h2>Mi música</h2>
+      <p>Mi género más escuchado es el trap, aunque también escucho otros estilos.</p>
+      <h5>Artistas que suelo escuchar</h5>
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-md"><div class="card h-100"><img alt="Grupo Morat" class="card-img-top imagen-artista" decoding="async" loading="lazy" src="https://listindiario.com/uploads/2024/06/06/6661d6f16e575.jpeg"/><div class="card-body text-center"><strong>Morat</strong></div></div></div>
+        <div class="col-6 col-md"><div class="card h-100"><img alt="Sebastián Yatra" class="card-img-top imagen-artista" decoding="async" loading="lazy" src="https://www.infobae.com/resizer/v2/E7V25DWB2FDZBBUYGZYCYJ6UEM.jpg?auth=5f98e6bfbabecbc96a04c5dc2d3d7f227dfc33579e86463df18ffe2e6e3a540f&amp;height=1200&amp;quality=85&amp;smart=true&amp;width=1200"/><div class="card-body text-center"><strong>Sebastián Yatra</strong></div></div></div>
+        <div class="col-6 col-md"><div class="card h-100"><img alt="Milo J" class="card-img-top imagen-artista" decoding="async" loading="lazy" src="https://revistacodigos.com/wp-content/uploads/2023/12/Milo-J.jpg"/><div class="card-body text-center"><strong>Milo J</strong></div></div></div>
+        <div class="col-6 col-md"><div class="card h-100"><img alt="Trueno" class="card-img-top imagen-artista" decoding="async" loading="lazy" src="https://www.infobae.com/resizer/v2/S2B2AE7U2FCFRGMKYWLAI64ZUY.jpg?auth=104622a49cf1e04776c3eda845916359cbd483fb11b57183216164c4278b6ed5&amp;height=1200&amp;quality=85&amp;smart=true&amp;width=1200"/><div class="card-body text-center"><strong>Trueno</strong></div></div></div>
+        <div class="col-6 col-md"><div class="card h-100"><img alt="Dúo Kevis y Maykyy" class="card-img-top imagen-artista" decoding="async" loading="lazy" src="https://www.publimetro.com.mx/resizer/v2/XIG3GRVXTBBMRKT4GJB4MAXLJ4.jpg?auth=570a9cb60bdb17a05d48b37e3b3bdec576bd5293bd15a58fd8f4b16f5eaa95c1&amp;height=1200&amp;smart=true&amp;width=1200"/><div class="card-body text-center"><strong>Kevin y Mayki</strong></div></div></div>
+      </div>
+      <h5 class="mt-4">Filtrar canciones por artista</h5>
+      <div class="d-flex flex-wrap gap-2 mb-3" id="botonesMusica">
+        <button class="btn btn-dark filtro-musica" data-artist="todos" type="button">Todos</button>
+        <button class="btn btn-outline-dark filtro-musica" data-artist="Sebastián Yatra" type="button">Sebastián Yatra</button>
+        <button class="btn btn-outline-dark filtro-musica" data-artist="Milo J" type="button">Milo J</button>
+        <button class="btn btn-outline-dark filtro-musica" data-artist="Kevin y Mayki" type="button">Kevin y Mayki</button>
+        <button class="btn btn-outline-dark filtro-musica" data-artist="Bonanza" type="button">Bonanza</button>
+        <button class="btn btn-outline-dark filtro-musica" data-artist="Tame Impala" type="button">Tame Impala</button>
+      </div>
+      <div class="row g-3" id="listaCanciones">
+        <div class="col-md-6 cancion" data-artist="Sebastián Yatra"><div class="card h-100"><div class="row g-0 align-items-center"><div class="col-4"><img alt="Micrófono de música pop" class="img-fluid rounded-start imagen-cancion" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&amp;fit=crop&amp;w=500&amp;q=85"/></div><div class="col-8"><div class="card-body"><strong>Ya no tiene novio</strong><p class="mb-0">Sebastián Yatra</p></div></div></div></div></div>
+        <div class="col-md-6 cancion" data-artist="Milo J"><div class="card h-100"><div class="row g-0 align-items-center"><div class="col-4"><img alt="Concierto de música urbana" class="img-fluid rounded-start imagen-cancion" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&amp;fit=crop&amp;w=500&amp;q=85"/></div><div class="col-8"><div class="card-body"><strong>Niño</strong><p class="mb-0">Milo J</p></div></div></div></div></div>
+        <div class="col-md-6 cancion" data-artist="Kevin y Mayki"><div class="card h-100"><div class="row g-0 align-items-center"><div class="col-4"><img alt="Concierto de hip hop" class="img-fluid rounded-start imagen-cancion" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&amp;fit=crop&amp;w=500&amp;q=85"/></div><div class="col-8"><div class="card-body"><strong>Back to the 90s</strong><p class="mb-0">Kevin y Mayki</p></div></div></div></div></div>
+        <div class="col-md-6 cancion" data-artist="Bonanza"><div class="card h-100"><div class="row g-0 align-items-center"><div class="col-4"><img alt="Grupo folklórico Bonanza" class="img-fluid rounded-start imagen-cancion" decoding="async" loading="lazy" src="https://3.bp.blogspot.com/-reGQEzMxOHY/VZWRzpKLw8I/AAAAAAAAXnQ/l79gxSHE24Y/s1600/Bonanza%2Bcelebra%2B25%2Ba%25C3%25B1os%2Bfestivos%2Bjunto.jpg"/></div><div class="col-8"><div class="card-body"><strong>Caracol</strong><p class="mb-0">Bonanza</p></div></div></div></div></div>
+        <div class="col-md-6 cancion" data-artist="Tame Impala"><div class="card h-100"><div class="row g-0 align-items-center"><div class="col-4"><img alt="Luces de concierto psicodélico" class="img-fluid rounded-start imagen-cancion" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&amp;fit=crop&amp;w=500&amp;q=85"/></div><div class="col-8"><div class="card-body"><strong>Loser</strong><p class="mb-0">Tame Impala</p></div></div></div></div></div>
+      </div>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="juegos" data-lazy-component="section" id="juegos">
+      <h2>Mis videojuegos</h2>
+      <p>Estos son algunos videojuegos que he jugado. El orden de favoritos está pendiente de confirmar.</p>
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <button class="btn btn-dark filtro-juego" data-game="todos" type="button">Todos</button>
+        <button class="btn btn-outline-dark filtro-juego" data-game="favoritos" type="button">Mis favoritos</button>
+      </div>
+      <div class="row g-3" id="listaJuegos">
+        <div class="col-md-4 juego-item" data-game="favorito">
+          <div class="card h-100">
+            <img alt="Videojuegos y competición" class="card-img-top imagen-juego" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&amp;fit=crop&amp;w=800&amp;q=80"/>
+            <div class="card-body"><h5>Tekken</h5><p class="card-text">Juego de lucha.</p><span class="badge bg-dark">Favorito provisional</span></div>
+          </div>
+        </div>
+        <div class="col-md-4 juego-item" data-game="favorito">
+          <div class="card h-100">
+            <img alt="Control de videojuegos" class="card-img-top imagen-juego" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1493711662062-fa54104f7cf8?auto=format&amp;fit=crop&amp;w=800&amp;q=80"/>
+            <div class="card-body"><h5>Overwatch</h5><p class="card-text">Acción y trabajo en equipo.</p><span class="badge bg-dark">Favorito provisional</span></div>
+          </div>
+        </div>
+        <div class="col-md-4 juego-item" data-game="normal"><div class="card h-100">
+          <img alt="Consola de videojuegos" class="card-img-top imagen-juego" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&amp;fit=crop&amp;w=800&amp;q=80"/>
+          <div class="card-body"><h5>FIFA 23</h5><p class="card-text">Fútbol y competición.</p></div>
+        </div></div>
+        <div class="col-md-4 juego-item" data-game="normal"><div class="card h-100">
+          <img alt="Consola retro" class="card-img-top imagen-juego" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&amp;fit=crop&amp;w=800&amp;q=80"/>
+          <div class="card-body"><h5>Cuphead</h5><p class="card-text">Juego de plataformas y acción.</p></div>
+        </div></div>
+        <div class="col-md-4 juego-item" data-game="normal"><div class="card h-100">
+          <img alt="Videojuego móvil" class="card-img-top imagen-juego" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1606503153255-59d8b8b821f7?auto=format&amp;fit=crop&amp;w=800&amp;q=80"/>
+          <div class="card-body"><h5>Clash Royale</h5><p class="card-text">Estrategia y competencia.</p></div>
+        </div></div>
+        <div class="col-md-4 juego-item" data-game="normal"><div class="card h-100">
+          <img alt="Videojuego" class="card-img-top imagen-juego" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&amp;fit=crop&amp;w=800&amp;q=80"/>
+          <div class="card-body"><h5>Pokémon GO</h5><p class="card-text">Aventura y exploración.</p></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="proyectos" data-lazy-component="section" id="proyectos">
+      <h2>Mis proyectos formativos</h2>
+      <p>Trabajos e ideas que he desarrollado o trabajado durante mi formación. Algunas propuestas todavía pueden estar en desarrollo.</p>
+      <div class="mb-3">
+        <label class="form-label visually-hidden" for="buscadorProyectos">Buscar proyectos</label>
+        <input class="form-control mb-2" id="buscadorProyectos" type="search" placeholder="Buscar por nombre o tecnología..." aria-label="Buscar proyectos"/>
+        <div class="d-flex flex-wrap gap-2" role="group" aria-label="Filtrar proyectos">
+          <button class="btn btn-dark filtro-proyecto" data-category="todos" type="button">Todos</button>
+          <button class="btn btn-outline-dark filtro-proyecto" data-category="programacion" type="button">Programación</button>
+          <button class="btn btn-outline-dark filtro-proyecto" data-category="sistemas" type="button">Sistemas</button>
+          <button class="btn btn-outline-dark filtro-proyecto" data-category="bases" type="button">Bases de datos</button>
+          <button class="btn btn-outline-dark filtro-proyecto" data-category="electronica" type="button">Electrónica</button>
+          <button class="btn btn-outline-dark filtro-proyecto" data-category="investigacion" type="button">Investigación operativa</button>
+        </div>
+      </div>
+      <p class="small text-secondary" id="contadorProyectos" aria-live="polite"></p>
+      <div class="row g-3" id="listaProyectos">
+        <div class="col-md-6 proyecto-item" data-category="sistemas">
+          <div class="card h-100">
+            <img alt="Imagen ilustrativa de CanchaPlus" class="card-img-top imagen-proyecto" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1574629810379-ea96b529993a?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+            <div class="card-body">
+              <h5>CanchaPlus – Reservas deportivas</h5>
+              <p>Proyecto independiente orientado a la consulta y reserva de canchas deportivas. Incluye frontend PWA y backend con Node.js, Express y SQLite.</p>
+              <small class="text-secondary">Tecnologías: HTML, CSS, JavaScript, jQuery, Node.js, Express y SQLite.</small>
+              <div class="mt-2"><span class="badge bg-secondary">Proyecto independiente</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 proyecto-item" data-category="programacion">
+          <div class="card h-100">
+            <img alt="Imagen ilustrativa de portafolio web" class="card-img-top imagen-proyecto" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+            <div class="card-body">
+              <h5>Presentación personal / Portafolio web</h5>
+              <p>Página web personal para presentar mi perfil, formación, habilidades, intereses y proyectos.</p>
+              <small class="text-secondary">Tecnologías: HTML, CSS, JavaScript, PWA, Service Workers y GitHub Pages.</small>
+              <div class="mt-2"><span class="badge bg-secondary">En desarrollo</span></div>
+              <div class="mt-2">
+                <a class="btn btn-outline-dark btn-sm" href="https://github.com/leonardojaureguim845-sketch/presentacion2.0" rel="noopener noreferrer" target="_blank">Repositorio</a>
+                <a class="btn btn-outline-dark btn-sm" href="https://leonardojaureguim845-sketch.github.io/presentacion2.0/" rel="noopener noreferrer" target="_blank">Demostración</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 proyecto-item" data-category="sistemas">
+          <div class="card h-100">
+            <img alt="Imagen ilustrativa de sistema de citas médicas" class="card-img-top imagen-proyecto" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+            <div class="card-body">
+              <h5>Sistema de citas médicas</h5>
+              <p>Proyecto académico relacionado con la gestión de citas y procesos de atención médica.</p>
+              <small class="text-secondary">Tecnologías: pendientes de confirmación.</small>
+              <div class="mt-2"><span class="badge bg-secondary">Académico</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 proyecto-item" data-category="programacion">
+          <div class="card h-100">
+            <img alt="Imagen ilustrativa de Mibus" class="card-img-top imagen-proyecto" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+            <div class="card-body">
+              <h5>Mibus – Transporte en La Paz</h5>
+              <p>Idea de aplicación para consultar rutas de minibuses y trufis en La Paz.</p>
+              <small class="text-secondary">Tecnologías previstas: C#, .NET y SQL Server.</small>
+              <div class="mt-2"><span class="badge bg-secondary">Idea / planificación</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 proyecto-item" data-category="sistemas">
+          <div class="card h-100">
+            <img alt="Imagen ilustrativa de plataforma de empleo" class="card-img-top imagen-proyecto" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1521737604893-d14cc2ae119a?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+            <div class="card-body">
+              <h5>Plataforma de búsqueda de empleo</h5>
+              <p>Idea de plataforma donde los trabajadores puedan publicar sus currículums y las empresas encontrar candidatos.</p>
+              <small class="text-secondary">Tecnologías: pendientes de confirmación.</small>
+              <div class="mt-2"><span class="badge bg-secondary">Idea</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 proyecto-item" data-category="bases">
+          <div class="card h-100">
+            <img alt="Imagen ilustrativa de bases de datos" class="card-img-top imagen-proyecto" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+            <div class="card-body">
+              <h5>Sistemas académicos y bases de datos</h5>
+              <p>Trabajos académicos relacionados con diseño, administración y modelado de bases de datos.</p>
+              <small class="text-secondary">Tecnologías: SQL Server, PostgreSQL y herramientas relacionadas.</small>
+              <div class="mt-2"><span class="badge bg-secondary">Académico</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="habilidades" data-lazy-component="section" id="habilidades">
+      <h2>Habilidades técnicas</h2>
+      <p>Tecnologías y herramientas con las que he tenido contacto en mis estudios y proyectos. Los niveles específicos se confirmarán posteriormente.</p>
+      <div class="row g-3">
+        <div class="col-md-6"><div class="card h-100"><div class="card-body">
+          <h5>Desarrollo web</h5>
+          <p class="mb-1">HTML, CSS, JavaScript, jQuery, PWA y Service Workers.</p>
+        </div></div></div>
+        <div class="col-md-6"><div class="card h-100"><div class="card-body">
+          <h5>Programación</h5>
+          <p class="mb-1">C#, C++, .NET Framework, Node.js y Express.</p>
+        </div></div></div>
+        <div class="col-md-6"><div class="card h-100"><div class="card-body">
+          <h5>Bases de datos</h5>
+          <p class="mb-1">SQL Server, PostgreSQL, MySQL y SQLite.</p>
+        </div></div></div>
+        <div class="col-md-6"><div class="card h-100"><div class="card-body">
+          <h5>Herramientas y entornos</h5>
+          <p class="mb-1">Git, GitHub, Visual Studio, SQL Server Management Studio, VMware y Linux.</p>
+        </div></div></div>
+      </div>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="formacion" data-lazy-component="section" id="formacion">
+      <h2>Formación académica</h2>
+      <p>Resumen de mi trayectoria académica actual.</p>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>Universidad:</strong> Universidad Privada Domingo Savio (UPDS).
+        </li>
+        <li class="list-group-item">
+          <strong>Carrera:</strong> Ingeniería en Sistemas.
+        </li>
+        <li class="list-group-item">
+          <strong>Nivel académico:</strong> Sexto semestre.
+        </li>
+        <li class="list-group-item">
+          <strong>Áreas de estudio:</strong> programación, bases de datos, sistemas, electrónica e investigación operativa.
+        </li>
+        <li class="list-group-item text-secondary">
+          Los cursos, certificaciones, talleres y logros académicos se incorporarán cuando estén confirmados.
+        </li>
+      </ul>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="grafico" data-lazy-component="section" id="grafico">
+      <h2>Mis intereses en porcentajes</h2>
+      <p>Distribución referencial de mis gustos.</p>
+      <p>Deportes</p><div class="progress mb-3"><div class="progress-bar bg-dark" style="width: 30%">30%</div></div>
+      <p>Música</p><div class="progress mb-3"><div class="progress-bar bg-secondary" style="width: 25%">25%</div></div>
+      <p>Videojuegos</p><div class="progress mb-3"><div class="progress-bar bg-dark" style="width: 20%">20%</div></div>
+      <p>Tecnología</p><div class="progress mb-3"><div class="progress-bar bg-secondary" style="width: 15%">15%</div></div>
+      <p>Idiomas</p><div class="progress mb-3"><div class="progress-bar bg-dark" style="width: 10%">10%</div></div>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="registro" data-lazy-component="section" id="registro">
+      <h2>Formulario de contratación</h2>
+      <p>¿Te interesa contratar mis servicios o conversar sobre una oportunidad laboral o proyecto? Completa este formulario para que pueda contactarte.</p>
+      <form id="formularioContratacion" novalidate>
+        <div class="mb-3">
+          <label class="form-label" for="nombre">Nombre completo</label>
+          <input class="form-control" id="nombre" type="text" placeholder="Ej. Juan Pérez" autocomplete="name" required/>
+          <div class="mensaje" id="errorNombre"></div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="correo">Correo electrónico</label>
+          <input class="form-control" id="correo" type="email" placeholder="nombre@correo.com" autocomplete="email" disabled required/>
+          <div class="mensaje" id="errorCorreo"></div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="telefono">Número de celular</label>
+          <input class="form-control" id="telefono" type="tel" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" placeholder="8 dígitos" autocomplete="tel" disabled required/>
+          <div class="mensaje" id="errorTelefono"></div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="tipoContratacion">Tipo de contratación</label>
+          <select class="form-select" id="tipoContratacion" disabled required>
+            <option value="">Selecciona una opción</option>
+            <option value="Oportunidad laboral">Oportunidad laboral</option>
+            <option value="Desarrollo de proyecto">Desarrollo de proyecto</option>
+            <option value="Prácticas profesionales">Prácticas profesionales</option>
+            <option value="Colaboración">Colaboración</option>
+            <option value="Otro">Otro</option>
+          </select>
+          <div class="mensaje" id="errorTipo"></div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="descripcion">Descripción de la propuesta</label>
+          <textarea class="form-control" id="descripcion" rows="4" placeholder="Cuéntame brevemente sobre la oportunidad o proyecto..." disabled required></textarea>
+          <div class="mensaje" id="errorDescripcion"></div>
+        </div>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" class="visually-hidden" aria-hidden="true"/>
+        <button class="btn btn-dark" id="enviar" type="submit" disabled>Enviar solicitud</button>
+        <p class="mt-3" id="resultadoFormulario" aria-live="polite"></p>
+        <p class="small text-secondary" id="estadoPendientes" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="container seccion app-screen" data-app-screen="bitacora" data-lazy-component="section" id="bitacora">
+      <h2>Bitácora de avances</h2>
+      <p>Cronología de hitos de mi portafolio y proyectos, con información confirmada.</p>
+      <div class="timeline">
+        <article class="timeline-item reveal">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <h5>Renovación del portafolio personal</h5>
+            <p class="mb-1">Unificación de la interfaz, mejora de PWA, modo offline y organización de proyectos.</p>
+            <small class="text-secondary">Estado: en desarrollo</small>
+          </div>
+        </article>
+        <article class="timeline-item reveal">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <h5>Publicación inicial en GitHub Pages</h5>
+            <p class="mb-1">Primera versión disponible en línea para presentación académica y profesional.</p>
+            <small class="text-secondary">Estado: publicado</small>
+          </div>
+        </article>
+        <article class="timeline-item reveal">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <h5>Proyectos académicos documentados</h5>
+            <p class="mb-1">Clasificación de trabajos por programación, sistemas, bases de datos, electrónica e investigación operativa.</p>
+            <small class="text-secondary">Estado: en actualización</small>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-4 app-screen" data-app-screen="contacto" id="contacto">
+      <h4>¡Gracias por visitar mi página!</h4>
+      <p>Mis redes y perfiles</p>
+      <a class="text-white mx-2" href="https://github.com/leonardojaureguim845-sketch" rel="noopener noreferrer" target="_blank">GitHub</a>
+      <p class="small text-secondary mt-2 mb-0">Otros canales de contacto se agregarán cuando estén confirmados.</p>
+      <p class="mt-3 mb-0">© 2026 Leonardo - Leo</p>
+      <p class="small mb-0">Portafolio personal. Información académica en actualización.</p>
+    </footer>
+  </main>
+
+  <nav class="mobile-bottom-nav" aria-label="Navegación rápida">
+    <a href="#inicio" class="active"><span class="bottom-icon" aria-hidden="true">⌂</span><small>Inicio</small></a>
+    <a href="#proyectos"><span class="bottom-icon" aria-hidden="true">▣</span><small>Proyectos</small></a>
+    <a href="#habilidades"><span class="bottom-icon" aria-hidden="true">⚙</span><small>Skills</small></a>
+    <a href="#contacto"><span class="bottom-icon" aria-hidden="true">✉</span><small>Contacto</small></a>
+  </nav>
+
+  <div aria-live="polite" class="pwa-status" id="pwaStatus" role="status">Conectado</div>
+  <button class="pwa-install-button" hidden id="pwaInstallButton" type="button">Instalar aplicación</button>
+
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="lazy-loader.js" type="module"></script>
+  <script src="pwa.js" defer></script>
+</body>
+</html>
