@@ -10,9 +10,11 @@
     const dark = theme === "dark";
     body.classList.toggle("modo-oscuro", dark);
     themeButtons.forEach((button) => {
-      button.textContent = dark ? "Modo claro" : "Modo oscuro";
+      button.textContent = dark ? "☀️ Modo claro" : "🌙 Modo oscuro";
       button.setAttribute("aria-pressed", String(dark));
     });
+    const desktopBtn = document.getElementById("botonTemaDesktop");
+    if (desktopBtn) desktopBtn.textContent = dark ? "☀️" : "🌙";
     try { localStorage.setItem(THEME_KEY, theme); } catch (_) { /* ignore */ }
   }
 
@@ -240,13 +242,6 @@
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && isMobileMenu()) closeMenu();
-  });
-
-  document.addEventListener("click", (event) => {
-    if (!isMobileMenu()) return;
-    if (menu && menuToggle && !menu.contains(event.target) && !menuToggle.contains(event.target) && !(menuOverlay && menuOverlay.contains(event.target))) {
-      // no cerrar por clics fuera del panel excepto overlay
-    }
   });
 
   const initialScreen = location.hash.slice(1);
@@ -534,7 +529,7 @@
   function updateHeaderConnection() {
     if (!headerConnection) return;
     const offline = !navigator.onLine;
-    headerConnection.textContent = offline ? "Sin conexión" : "En línea";
+    headerConnection.textContent = offline ? "● Sin conexión" : "● En línea";
     headerConnection.classList.toggle("offline", offline);
   }
   updateHeaderDate();
@@ -556,6 +551,14 @@
   initTheme();
   applyProjectFilters();
   updatePendingStatus();
+
+  const hydrateBtn = document.getElementById("botonHidratar");
+  if (hydrateBtn) {
+    hydrateBtn.addEventListener("click", () => {
+      hydrateBtn.textContent = "⏳";
+      setTimeout(() => location.reload(), 300);
+    });
+  }
 
   window.addEventListener("online", () => {
     updatePendingStatus();

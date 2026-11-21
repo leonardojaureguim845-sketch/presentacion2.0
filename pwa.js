@@ -7,7 +7,7 @@
 
   function setStatus(message, offline = false) {
     if (status) {
-      status.textContent = message;
+      status.textContent = offline ? "● Sin conexión" : "● En línea";
       status.classList.toggle("offline", offline);
     }
     if (mobileStatus) mobileStatus.textContent = offline ? "● Sin conexión" : "● En línea";

@@ -34,12 +34,12 @@
     <div class="container-fluid">
       <div class="navbar-brand-wrap">
         <a class="navbar-brand fw-bold mb-0" href="#inicio">LEO</a>
-        <span class="navbar-date d-none d-md-inline" id="headerDate"></span>
       </div>
       <div class="navbar-actions">
         <span class="connection-pill" id="headerConnection">En línea</span>
-        <button class="icon-btn d-none d-lg-inline-flex" id="headerSearch" type="button" aria-label="Buscar proyectos">⌕</button>
-        <button class="btn btn-outline-light btn-sm d-none d-lg-inline-block" id="botonTemaDesktop" type="button" aria-pressed="false">Modo oscuro</button>
+        <button class="icon-btn" id="headerSearch" type="button" aria-label="Buscar proyectos" title="Buscar proyectos">🔍</button>
+        <button class="icon-btn" id="botonTemaDesktop" type="button" aria-pressed="false" aria-label="Cambiar modo claro/oscuro" title="Modo claro/oscuro">🌙</button>
+        <button class="icon-btn" id="botonHidratar" type="button" aria-label="Hidratar y recargar la página" title="Hidratar página">🔄</button>
         <button class="navbar-toggler" type="button" id="menuToggle" aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -94,7 +94,7 @@
           <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
         </ul>
         <div class="drawer-footer d-lg-none">
-          <button class="btn btn-outline-light btn-sm w-100 mb-2" id="botonTema" type="button" aria-pressed="false">Modo oscuro</button>
+          <button class="btn btn-outline-light btn-sm w-100 mb-2" id="botonTema" type="button" aria-pressed="false" aria-label="Cambiar modo claro/oscuro">🌙 Modo oscuro</button>
           <button class="btn btn-outline-light btn-sm w-100" id="pwaInstallButtonDrawer" type="button">Instalar aplicación</button>
         </div>
       </div>
@@ -545,8 +545,11 @@
     <footer class="bg-dark text-white text-center py-4 app-screen" data-app-screen="contacto" id="contacto">
       <h4>¡Gracias por visitar mi página!</h4>
       <p>Mis redes y perfiles</p>
-      <a class="text-white mx-2" href="https://github.com/leonardojaureguim845-sketch" rel="noopener noreferrer" target="_blank">GitHub</a>
-      <p class="small text-secondary mt-2 mb-0">Otros canales de contacto se agregarán cuando estén confirmados.</p>
+      <div class="redes-footer">
+        <a class="text-white" href="https://github.com/leonardojaureguim845-sketch" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a class="text-white" href="https://wa.me/59177564187" rel="noopener noreferrer" target="_blank">WhatsApp</a>
+      </div>
+      <p class="small text-secondary mt-2 mb-0">Contacto directo: +591 77564187</p>
       <p class="mt-3 mb-0">© 2026 Leonardo - Leo</p>
       <p class="small mb-0">Portafolio personal. Información académica en actualización.</p>
     </footer>
